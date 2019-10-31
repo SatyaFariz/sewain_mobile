@@ -18,7 +18,7 @@
     "moment": "^2.24.0",
     "navigation": "^5.2.0",
     "navigation-react": "^4.1.1",
-    "navigation-react-native": "^6.0.0",
+    "navigation-react-native": "^6.2.0",
     "react": "16.11.0",
     "react-native": "0.61.3",
     "react-native-dates": "^2.0.4",
