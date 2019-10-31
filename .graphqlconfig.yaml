@@ -1,0 +1,8 @@
+projects:
+  sewaain_mobile:
+    schemaPath: schema.graphql
+    extensions:
+      endpoints:
+        dev:
+          url: 'http://www.sewain-dummy.com/graphql.php'
+         # subscription: 'ws://localhost:4000/graphql'

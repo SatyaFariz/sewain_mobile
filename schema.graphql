@@ -1,0 +1,337 @@
+# source: http://www.sewain-dummy.com/graphql.php
+# timestamp: Thu Oct 31 2019 20:27:33 GMT+0700 (SE Asia Standard Time)
+
+type ActionInfo {
+  success: Boolean
+  message: String
+}
+
+input AddProductToCartInput {
+  productID: Int!
+  startDate: Datetime!
+  endDate: Datetime!
+  quantity: Int
+  note: String
+  deliveryAddress: String!
+}
+
+type Admin {
+  id: ID
+  userData: User
+  search(category_id: Int, q: String!, after: String, first: Int, before: String, last: Int): ProductConnection
+  cart(after: String, first: Int, before: String, last: Int): CartedProductConnection
+  leasedProducts(after: String, first: Int, before: String, last: Int): LeasedProductConnection
+  category(categoryID: Int!): Category!
+  categories: [Category]
+  product(productID: Int!): Product
+  cartedProduct(cartedProductID: Int!): CartedProduct
+  leasedProduct(leasedProductID: Int!): LeasedProduct
+  products(category_id: Int, after: String, first: Int, before: String, last: Int): ProductConnection
+  promotionalProducts: [Product]
+  featuredProducts: [Product]
+}
+
+type Attribute {
+  name: String
+  value: String
+}
+
+input AttributeInput {
+  name: String!
+  value: String!
+}
+
+type CartedProduct {
+  id: ID
+  cartedProductID: Int
+  productID: Int
+  name: String
+  type: String
+  renterComment: String
+  rentalPricePerDay: Float
+  rentalPricePerDayText: String
+  totalPrice: Float
+  quantity: Int
+  totalDays: Int
+  dateFrom: String
+  dateTo: String
+  deliveryAddress: String
+  rentalDatesText: String
+  totalPriceText: String
+  displayImage: Image
+  renter: User
+}
+
+"""A connection to a list of items."""
+type CartedProductConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination"""
+  edges: [CartedProductEdge]
+}
+
+"""An edge in a connection"""
+type CartedProductEdge {
+  """The item at the end of the edge"""
+  node: CartedProduct
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type Category {
+  id: ID
+  categoryID: String
+  name: String
+  icon: String
+  backgroundColor: String
+  banner: Image
+  bannerMobile: Image
+}
+
+scalar Datetime
+
+type DeletePayload {
+  actionInfo: ActionInfo
+  deletedID: Int
+}
+
+scalar Email
+
+type Image {
+  id: ID
+  publicID: ID
+  url: String
+  secureUrl: String
+  width: Int
+  height: Int
+  isUploaded: Boolean
+}
+
+type LeasedProduct {
+  id: ID
+  leasedProductID: Int
+  productID: Int
+  name: String
+  type: String
+  rentalPricePerDay: Float
+  rentalPricePerDayText: String
+  totalPrice: Float
+  totalPriceText: String
+  totalLateFee: Float
+  totalLateFeeText: String
+  totalPricePlusTotalLateFeeText: String
+  quantity: Int
+  totalDays: Int
+  dateFrom: String
+  dateTo: String
+  isDueToday: Boolean
+  returnDate: String
+  totalDaysOverdue: Int
+  rentalDatesText: String
+  displayImage: Image
+  renter: User
+}
+
+"""A connection to a list of items."""
+type LeasedProductConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination"""
+  edges: [LeasedProductEdge]
+}
+
+"""An edge in a connection"""
+type LeasedProductEdge {
+  """The item at the end of the edge"""
+  node: LeasedProduct
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type Mutation {
+  hashPassword(password: String!): String
+  register(input: RegisterInput!): UserActionPayload
+  login(as: UserTypeEnum!, usernameOrEmail: String!, password: String!): UserActionPayload
+  nameUpdate(name: String!): User
+  usernameUpdate(username: Username!): UserActionPayload
+  emailUpdate(email: Email!): UserActionPayload
+  addressUpdate(address: String!): User
+  phoneUpdate(phone: String!): User
+  passwordUpdate(oldPassword: String!, newPassword: String!): ActionInfo
+  logout: ActionInfo
+  markReadNotifications: Viewer
+  getUnreadNotificationsCount: Viewer
+  sendResetPasswordCode(email: Email!): ActionInfo
+  resetPassword(email: Email!, code: String!, newPassword: String!): ActionInfo
+  addProductToCart(input: AddProductToCartInput!): ProductActionPayload
+  removeProductFromCart(cartedProductID: Int!): DeletePayload
+  adminProductDisplayImageUpdate(productID: Int!): Product
+  adminProductImageAdd(productID: Int!): Image
+  adminProductImageDelete(productID: Int!, imageID: String!): String
+  adminCategoryBannerMobileUpdate(categoryID: Int!): Category
+  adminProductAttributesUpdate(productID: Int!, attributes: [AttributeInput!]!): Product
+  adminLeasedProductAdd(cartedProductID: Int!): ActionInfo
+  adminLeasedProductReturnVerify(leasedProductID: Int!): ActionInfo
+  adminNotificationPublish(title: String!, message: String!): ActionInfo
+}
+
+type Notification {
+  id: String
+  rowID: Int
+  refID: Int
+  ref: String
+  title: String
+  text: String
+  webClickAction: String
+  mobilePressAction: String
+  url: String
+  date: String
+}
+
+"""A connection to a list of items."""
+type NotificationConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination"""
+  edges: [NotificationEdge]
+}
+
+"""An edge in a connection"""
+type NotificationEdge {
+  """The item at the end of the edge"""
+  node: Notification
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Product {
+  id: ID
+  productID: Int
+  name: String
+  type: String
+  rentalPricePerDay: Float
+  promotionalPrice: Float
+  promotionalPriceText: String
+  availableItems: Int
+  rentalPricePerDayText: String
+  estimatedBuyPrice: Float
+  estimatedBuyPriceText: String
+  displayImage: Image
+  images: [Image]
+  allImages: [Image]
+  attributes: [Attribute]
+  description: String
+  category: Category
+  sameCategoryProducts: [Product]
+  relatedProducts: [Product]
+}
+
+type ProductActionPayload {
+  actionInfo: ActionInfo
+  product: Product
+}
+
+"""A connection to a list of items."""
+type ProductConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination"""
+  edges: [ProductEdge]
+}
+
+"""An edge in a connection"""
+type ProductEdge {
+  """The item at the end of the edge"""
+  node: Product
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type Query {
+  echo(message: String!): String
+  viewer: Viewer
+  admin: Admin
+}
+
+input RegisterInput {
+  name: String!
+  username: String!
+  email: Email!
+  phone: String!
+  password: String!
+}
+
+type User {
+  id: ID
+  userID: Int
+  name: String
+  username: String
+  email: String
+  phone: String
+  address: String
+}
+
+type UserActionPayload {
+  actionInfo: ActionInfo
+  userData: User
+}
+
+scalar Username
+
+enum UserTypeEnum {
+  ADMIN
+  REGULAR_USER
+}
+
+type Viewer {
+  officialWhatsApp: String
+  officialInstagram: String
+  officialInstagramWeb: String
+  officialFacebook: String
+  officialFacebookWeb: String
+  officialTwitter: String
+  officialTwitterWeb: String
+  playstore: String
+  playstoreWeb: String
+  usersFeedbackGoogleFormUrl: String
+  termsAndConditions: String
+  privacyPolicy: String
+  products(categoryID: Int, after: String, first: Int, before: String, last: Int): ProductConnection
+  search(categoryID: Int, q: String!, after: String, first: Int, before: String, last: Int): ProductConnection
+  unreadNotificationsExists: Boolean
+  unreadNotificationsCount: Int
+  notifications(after: String, first: Int, before: String, last: Int): NotificationConnection
+  cart: [CartedProduct]
+  leasedProducts: [LeasedProduct]
+  id: ID
+  isAuthenticated: Boolean
+  userData: User
+  category(categoryID: Int!): Category
+  categories: [Category]
+  product(productID: Int!): Product
+  featuredProducts: [Product]
+  promotionalProducts: [Product]
+}
