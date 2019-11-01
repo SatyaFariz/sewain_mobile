@@ -1,4 +1,4 @@
-package com.sewaain_mobile;
+package com.sewaain;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "sewaain_mobile";
+    return "sewaain";
   }
 }

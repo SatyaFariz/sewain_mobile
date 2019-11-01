@@ -1,4 +1,4 @@
-package com.sewaain_mobile;
+package com.sewaain;
 
 import android.app.Application;
 import android.content.Context;

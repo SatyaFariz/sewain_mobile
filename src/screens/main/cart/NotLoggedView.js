@@ -6,7 +6,7 @@ import NoContentView from '../../../common/NoContentView'
 
 const Component = props => {
 
-  const { environment } = useNavigator()
+  const { navigate } = useNavigator()
 
   const navigateToSignUp = () => {
     navigate('register')
