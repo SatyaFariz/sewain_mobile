@@ -44,11 +44,13 @@ class Component extends React.Component {
                 onSubmitEditing={this.props.handleSubmit}
               />
 
+              {this.props.query.length > 0 &&
               <TouchableWithoutFeedback onPress={this.props.resetQuery}>
                 <View style={s.icon}>
                   <Icon name="close" size={18}/>
                 </View>
               </TouchableWithoutFeedback>
+              }
             </View>
           </View>
         </Appbar.Header>
