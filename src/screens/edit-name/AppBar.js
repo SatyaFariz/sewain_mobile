@@ -1,16 +1,17 @@
 import React, { useContext } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, StatusBar } from 'react-native'
 import { Appbar, withTheme } from 'react-native-paper'
 import useNavigator from '../../hooks/useNavigator'
 
 const Component = props => {
   const { goBack } = useNavigator()
-  const { primary } = props.theme.colors
+  const { colors } = props.theme
 
-  const style = [s.container, { backgroundColor: primary }]
+  const style = [s.container, { backgroundColor: colors.primary }]
 
   return (
     <View style={style}>
+      <View style={[s.statusbar, { backgroundColor: colors.statusbar }]}/>
       <Appbar.Header style={style}>
         <Appbar.BackAction
           onPress={goBack}
@@ -26,6 +27,9 @@ const Component = props => {
 const s = StyleSheet.create({
   container: {
     elevation: 6
+  },
+  statusbar: {
+    height: StatusBar.currentHeight
   }
 })
 
