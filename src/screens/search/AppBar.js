@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, View, TextInput, TouchableWithoutFeedback, StatusBar } from 'react-native'
 import { Appbar, withTheme } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { NavigationContext } from 'navigation-react'
@@ -24,10 +24,11 @@ class Component extends React.Component {
   }
 
   render() {
-    const { primary } = this.props.theme.colors
-    const containerStyle = [s.rootContainer, { backgroundColor: primary }]
+    const { colors } = this.props.theme
+    const containerStyle = [s.rootContainer, { backgroundColor: colors.primary }]
     return (
       <View style={containerStyle}>
+        <View style={[s.statusbar, { backgroundColor: colors.statusbar }]}/>
         <Appbar.Header style={containerStyle}>
           <Appbar.BackAction
             onPress={this._goBack}
@@ -84,6 +85,9 @@ const s = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 4,
     paddingRight: 4
+  },
+  statusbar: {
+    height: StatusBar.currentHeight
   }
 })
 
