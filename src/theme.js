@@ -13,7 +13,8 @@ const theme = {
     lightGray: '#EEEEEE',
     link: '#1565C0',
     textSecondary: '#757575',
-    notification: 'red'
+    notification: 'red',
+    statusbar: '#3d4958'
   },
 }
 

@@ -2,6 +2,7 @@ package com.sewaain;
 
 import android.app.Application;
 import android.content.Context;
+
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -11,7 +12,18 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-public class MainApplication extends Application implements ReactApplication {
+import android.os.Bundle;
+import android.os.Build;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowInsets;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import com.facebook.react.bridge.UiThreadUtil;
+
+public class MainApplication extends Application implements ReactApplication, Application.ActivityLifecycleCallbacks {
+
+  private Activity mCurrentActivity;
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
@@ -44,7 +56,56 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
+    registerActivityLifecycleCallbacks(this);
     initializeFlipper(this); // Remove this line if you don't want Flipper enabled
+  }
+
+  @Override
+  public void onActivityCreated(Activity activity, Bundle bundle) {
+    mCurrentActivity = activity;
+    if (Build.VERSION.SDK_INT >= 20) {
+      setTranslucent();
+    }
+  }
+
+  @Override
+  public void onActivityDestroyed(Activity activity) {
+  }
+
+  @Override
+  public void onActivityStopped(Activity activity) {
+  }
+
+  @Override
+  public void onActivityPaused(Activity activity) {
+  }
+
+  @Override
+  public void onActivityResumed(Activity activity) {
+  }
+
+  @Override
+  public void onActivityStarted(Activity activity) {
+  }
+
+  @Override
+  public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
+  }
+
+  @TargetApi(20)
+  private void setTranslucent() {
+    ViewGroup decorView = (ViewGroup) mCurrentActivity.getWindow().getDecorView();
+    decorView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+        @Override
+        public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
+            WindowInsets defaultInsets = v.onApplyWindowInsets(insets);
+            return defaultInsets.replaceSystemWindowInsets(
+                    defaultInsets.getSystemWindowInsetLeft(),
+                    0,
+                    defaultInsets.getSystemWindowInsetRight(),
+                    defaultInsets.getSystemWindowInsetBottom());
+        }
+    });
   }
 
   /**
