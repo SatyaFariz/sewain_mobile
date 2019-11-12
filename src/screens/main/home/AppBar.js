@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { StyleSheet, Linking, View, ToastAndroid, Image } from 'react-native'
+import { StyleSheet, Linking, View, ToastAndroid, Image, StatusBar } from 'react-native'
 import { Appbar, IconButton, withTheme } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/Ionicons'
 import BottomNavigationContext from '../BottomNavigationContext'
@@ -8,7 +8,7 @@ import useEnvironment from '../../../hooks/useEnvironment'
 import Logo from '../../../assets/logo_light.svg'
 
 const Component = props => {
-  const { primary } = props.theme.colors
+  const { colors } = props.theme
   const { navigate } = useNavigator()
   const { environment } = useEnvironment()
   const { viewer } = useContext(BottomNavigationContext)
@@ -28,10 +28,11 @@ const Component = props => {
     }
   }
 
-  const style = [s.container, { backgroundColor: primary }]
+  const style = [s.container, { backgroundColor: colors.primary }]
 
   return (
     <View style={style}>
+      <View style={[s.statusbar, { backgroundColor: colors.statusbar }]}/>
       <Appbar.Header style={style}>
         <View
           style={s.logoContainer}
@@ -62,6 +63,9 @@ const s = StyleSheet.create({
   logoContainer: {
     flex: 1,
     marginLeft: 10
+  },
+  statusbar: {
+    height: StatusBar.currentHeight
   }
 })
 
