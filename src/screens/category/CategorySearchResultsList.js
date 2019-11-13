@@ -38,6 +38,7 @@ const Component = props => {
   return (
     <View style={s.container}>
       <FlatList
+        showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="always"
         contentContainerStyle={s.contentContainer}
         data={edges}

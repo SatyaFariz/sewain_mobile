@@ -35,6 +35,8 @@ const Component = props => {
 
   return (
     <FlatList
+      keyboardShouldPersistTaps="always"
+      showsVerticalScrollIndicator={false}
       data={edges}
       keyExtractor={item => item.node.id}
       renderItem={({item}) => (

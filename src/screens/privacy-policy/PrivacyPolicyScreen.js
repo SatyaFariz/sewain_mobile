@@ -34,6 +34,7 @@ const Component = _props => {
               <WebView 
                 style={s.container}
                 source={{ html: props.viewer.privacyPolicy }}
+                showsVerticalScrollIndicator={false}
               />
             )
           }

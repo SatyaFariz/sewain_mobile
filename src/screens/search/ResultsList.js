@@ -39,6 +39,7 @@ const Component = props => {
     <View style={s.container}>
       <FlatList
         keyboardShouldPersistTaps="always"
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={s.contentContainer}
         data={edges}
         keyExtractor={item => item.node.id}

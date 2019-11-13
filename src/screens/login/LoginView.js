@@ -75,6 +75,7 @@ const Component = props => {
   return (
     <ScrollView style={s.container}
       keyboardShouldPersistTaps="always"
+      showsVerticalScrollIndicator={false}
     >
       <TextField
         label='Username/Email'

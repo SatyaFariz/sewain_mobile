@@ -63,6 +63,7 @@ const Component = props => {
       <ScrollView 
         style={s.container}
         keyboardShouldPersistTaps="always"
+        showsVerticalScrollIndicator={false}
       >
         {renderView()}
       </ScrollView>

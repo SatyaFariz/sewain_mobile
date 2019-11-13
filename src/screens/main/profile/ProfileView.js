@@ -133,7 +133,10 @@ const Component = props => {
   }
 
   return (
-    <ScrollView>
+    <ScrollView
+      keyboardShouldPersistTaps="always"
+      showsVerticalScrollIndicator={false}
+    >
       <UserInfo user={props.viewer.userData}/>
       <Separator height={10}/>
       <Item text="Ketentuan Layanan" onPress={toTermsAndConditionsScreen}/>

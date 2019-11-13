@@ -9,6 +9,7 @@ const Component = props => {
   const { products } = props
   return (
     <FlatList
+      showsVerticalScrollIndicator={false}
       contentContainerStyle={s.contentContainer}
       data={products}
       keyExractor={item => item.id}

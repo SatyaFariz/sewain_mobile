@@ -11,6 +11,7 @@ const Component = props => {
       <WebView 
         style={s.container}
         source={{ uri: props.url }}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   )

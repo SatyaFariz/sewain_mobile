@@ -115,6 +115,7 @@ class Component extends React.Component {
     return (
       <ScrollView
         keyboardShouldPersistTaps="always"
+        showsVerticalScrollIndicator={false}
       >
         <View style={s.container}>
           <Title style={s.title}>Tanggal Peminjaman</Title>

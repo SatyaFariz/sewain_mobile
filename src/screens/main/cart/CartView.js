@@ -19,6 +19,8 @@ const Component = props => {
 
   return (
     <ScrollView
+      keyboardShouldPersistTaps="always"
+      showsVerticalScrollIndicator={false}
       contentContainerStyle={s.container}
       refreshControl={
         <RefreshControl

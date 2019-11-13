@@ -145,6 +145,7 @@ const Component = props => {
   return (
     <ScrollView
       keyboardShouldPersistTaps="always"
+      showsVerticalScrollIndicator={false}
     >
       <View style={s.container}>
         <TextField
