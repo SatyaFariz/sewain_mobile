@@ -23,16 +23,16 @@ const Component = props => {
 
   const _delete = () => {
     Alert.alert(
-      'Konfirmasi',
-      'Anda yakin ingin membatalkan pemesanan ?',
+      null,
+      'Anda yakin ingin membatalkan pesanan ini?',
       [
         {
-          text: 'Cancel',
+          text: 'Tidak',
           onPress: () => {},
           style: 'cancel',
         },
         {
-          text: 'OK', onPress: _deleteItem
+          text: 'Ya', onPress: _deleteItem
         },
       ],
       { cancelable: false },
