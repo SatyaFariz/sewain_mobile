@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8d0b5c1543395add359e0500e88752bb
+ * @relayHash 7d8bdc0e1c22d0ec4054471ba2acec4d
  */
 
 /* eslint-disable */
@@ -10,6 +10,7 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type ProductDetailView_product$ref = any;
+type ProductDetailView_viewer$ref = any;
 export type ProductDetailViewQueryVariables = {|
   productID: number
 |};
@@ -20,6 +21,7 @@ export type ProductDetailViewQueryResponse = {|
       +id: ?string,
       +$fragmentRefs: ProductDetailView_product$ref,
     |},
+    +$fragmentRefs: ProductDetailView_viewer$ref,
   |}
 |};
 export type ProductDetailViewQuery = {|
@@ -35,10 +37,26 @@ query ProductDetailViewQuery(
 ) {
   viewer {
     id
+    ...ProductDetailView_viewer
     product(productID: $productID) {
       id
       ...ProductDetailView_product
     }
+  }
+}
+
+fragment AddToCartButton_product on Product {
+  id
+  productID
+  availableItems
+}
+
+fragment AddToCartButton_viewer on Viewer {
+  id
+  isAuthenticated
+  userData {
+    id
+    address
   }
 }
 
@@ -66,10 +84,12 @@ fragment Price_product on Product {
 
 fragment ProductDetailView_product on Product {
   id
+  availableItems
   ...Title_product
   ...Price_product
   ...Description_product
   ...SameCategoryProductsList_product
+  ...AddToCartButton_product
   attributes {
     ...Attributes_attributes
   }
@@ -81,6 +101,11 @@ fragment ProductDetailView_product on Product {
     ...RelatedProductsList_products
     id
   }
+}
+
+fragment ProductDetailView_viewer on Viewer {
+  id
+  ...AddToCartButton_viewer
 }
 
 fragment RelatedProductItem_product on Product {
@@ -179,7 +204,14 @@ v5 = {
   "args": null,
   "storageKey": null
 },
-v6 = [
+v6 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "productID",
+  "args": null,
+  "storageKey": null
+},
+v7 = [
   (v1/*: any*/),
   {
     "kind": "ScalarField",
@@ -189,15 +221,9 @@ v6 = [
     "storageKey": null
   }
 ],
-v7 = [
+v8 = [
   (v1/*: any*/),
-  {
-    "kind": "ScalarField",
-    "alias": null,
-    "name": "productID",
-    "args": null,
-    "storageKey": null
-  },
+  (v6/*: any*/),
   (v3/*: any*/),
   (v4/*: any*/),
   (v5/*: any*/),
@@ -209,7 +235,7 @@ v7 = [
     "args": null,
     "concreteType": "Image",
     "plural": false,
-    "selections": (v6/*: any*/)
+    "selections": (v7/*: any*/)
   }
 ];
 return {
@@ -247,6 +273,11 @@ return {
                 "args": null
               }
             ]
+          },
+          {
+            "kind": "FragmentSpread",
+            "name": "ProductDetailView_viewer",
+            "args": null
           }
         ]
       }
@@ -268,6 +299,32 @@ return {
         "selections": [
           (v1/*: any*/),
           {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "isAuthenticated",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "userData",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "User",
+            "plural": false,
+            "selections": [
+              (v1/*: any*/),
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "address",
+                "args": null,
+                "storageKey": null
+              }
+            ]
+          },
+          {
             "kind": "LinkedField",
             "alias": null,
             "name": "product",
@@ -277,7 +334,6 @@ return {
             "plural": false,
             "selections": [
               (v1/*: any*/),
-              (v3/*: any*/),
               {
                 "kind": "ScalarField",
                 "alias": null,
@@ -285,6 +341,7 @@ return {
                 "args": null,
                 "storageKey": null
               },
+              (v3/*: any*/),
               {
                 "kind": "LinkedField",
                 "alias": null,
@@ -322,8 +379,9 @@ return {
                 "args": null,
                 "concreteType": "Product",
                 "plural": true,
-                "selections": (v7/*: any*/)
+                "selections": (v8/*: any*/)
               },
+              (v6/*: any*/),
               {
                 "kind": "LinkedField",
                 "alias": null,
@@ -351,7 +409,7 @@ return {
                 "args": null,
                 "concreteType": "Image",
                 "plural": true,
-                "selections": (v6/*: any*/)
+                "selections": (v7/*: any*/)
               },
               {
                 "kind": "LinkedField",
@@ -361,7 +419,7 @@ return {
                 "args": null,
                 "concreteType": "Product",
                 "plural": true,
-                "selections": (v7/*: any*/)
+                "selections": (v8/*: any*/)
               }
             ]
           }
@@ -373,11 +431,11 @@ return {
     "operationKind": "query",
     "name": "ProductDetailViewQuery",
     "id": null,
-    "text": "query ProductDetailViewQuery(\n  $productID: Int!\n) {\n  viewer {\n    id\n    product(productID: $productID) {\n      id\n      ...ProductDetailView_product\n    }\n  }\n}\n\nfragment Attributes_attributes on Attribute {\n  name\n  value\n}\n\nfragment Description_product on Product {\n  id\n  description\n}\n\nfragment Images_images on Image {\n  id\n  secureUrl\n}\n\nfragment Price_product on Product {\n  id\n  rentalPricePerDayText\n  promotionalPriceText\n  estimatedBuyPriceText\n}\n\nfragment ProductDetailView_product on Product {\n  id\n  ...Title_product\n  ...Price_product\n  ...Description_product\n  ...SameCategoryProductsList_product\n  attributes {\n    ...Attributes_attributes\n  }\n  allImages {\n    ...Images_images\n    id\n  }\n  relatedProducts {\n    ...RelatedProductsList_products\n    id\n  }\n}\n\nfragment RelatedProductItem_product on Product {\n  id\n  productID\n  name\n  rentalPricePerDayText\n  promotionalPriceText\n  displayImage {\n    id\n    secureUrl\n  }\n}\n\nfragment RelatedProductsList_products on Product {\n  id\n  ...RelatedProductItem_product\n}\n\nfragment SameCategoryProductItem_product on Product {\n  id\n  productID\n  name\n  rentalPricePerDayText\n  promotionalPriceText\n  displayImage {\n    id\n    secureUrl\n  }\n}\n\nfragment SameCategoryProductsList_product on Product {\n  id\n  category {\n    name\n    id\n  }\n  sameCategoryProducts {\n    ...SameCategoryProductItem_product\n    id\n  }\n}\n\nfragment Title_product on Product {\n  id\n  name\n  availableItems\n  category {\n    id\n    name\n  }\n}\n",
+    "text": "query ProductDetailViewQuery(\n  $productID: Int!\n) {\n  viewer {\n    id\n    ...ProductDetailView_viewer\n    product(productID: $productID) {\n      id\n      ...ProductDetailView_product\n    }\n  }\n}\n\nfragment AddToCartButton_product on Product {\n  id\n  productID\n  availableItems\n}\n\nfragment AddToCartButton_viewer on Viewer {\n  id\n  isAuthenticated\n  userData {\n    id\n    address\n  }\n}\n\nfragment Attributes_attributes on Attribute {\n  name\n  value\n}\n\nfragment Description_product on Product {\n  id\n  description\n}\n\nfragment Images_images on Image {\n  id\n  secureUrl\n}\n\nfragment Price_product on Product {\n  id\n  rentalPricePerDayText\n  promotionalPriceText\n  estimatedBuyPriceText\n}\n\nfragment ProductDetailView_product on Product {\n  id\n  availableItems\n  ...Title_product\n  ...Price_product\n  ...Description_product\n  ...SameCategoryProductsList_product\n  ...AddToCartButton_product\n  attributes {\n    ...Attributes_attributes\n  }\n  allImages {\n    ...Images_images\n    id\n  }\n  relatedProducts {\n    ...RelatedProductsList_products\n    id\n  }\n}\n\nfragment ProductDetailView_viewer on Viewer {\n  id\n  ...AddToCartButton_viewer\n}\n\nfragment RelatedProductItem_product on Product {\n  id\n  productID\n  name\n  rentalPricePerDayText\n  promotionalPriceText\n  displayImage {\n    id\n    secureUrl\n  }\n}\n\nfragment RelatedProductsList_products on Product {\n  id\n  ...RelatedProductItem_product\n}\n\nfragment SameCategoryProductItem_product on Product {\n  id\n  productID\n  name\n  rentalPricePerDayText\n  promotionalPriceText\n  displayImage {\n    id\n    secureUrl\n  }\n}\n\nfragment SameCategoryProductsList_product on Product {\n  id\n  category {\n    name\n    id\n  }\n  sameCategoryProducts {\n    ...SameCategoryProductItem_product\n    id\n  }\n}\n\nfragment Title_product on Product {\n  id\n  name\n  availableItems\n  category {\n    id\n    name\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '10663cc530a0d39c870ee7cfe2fbf994';
+(node/*: any*/).hash = '2a818c16826950df00c5eed573c6bf50';
 module.exports = node;

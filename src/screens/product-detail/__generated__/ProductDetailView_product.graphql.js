@@ -8,6 +8,7 @@
 
 /*::
 import type { ReaderFragment } from 'relay-runtime';
+type AddToCartButton_product$ref = any;
 type Attributes_attributes$ref = any;
 type Description_product$ref = any;
 type Images_images$ref = any;
@@ -20,6 +21,7 @@ declare export opaque type ProductDetailView_product$ref: FragmentReference;
 declare export opaque type ProductDetailView_product$fragmentType: ProductDetailView_product$ref;
 export type ProductDetailView_product = {|
   +id: ?string,
+  +availableItems: ?number,
   +attributes: ?$ReadOnlyArray<?{|
     +$fragmentRefs: Attributes_attributes$ref
   |}>,
@@ -29,7 +31,7 @@ export type ProductDetailView_product = {|
   +relatedProducts: ?$ReadOnlyArray<?{|
     +$fragmentRefs: RelatedProductsList_products$ref
   |}>,
-  +$fragmentRefs: Title_product$ref & Price_product$ref & Description_product$ref & SameCategoryProductsList_product$ref,
+  +$fragmentRefs: Title_product$ref & Price_product$ref & Description_product$ref & SameCategoryProductsList_product$ref & AddToCartButton_product$ref,
   +$refType: ProductDetailView_product$ref,
 |};
 export type ProductDetailView_product$data = ProductDetailView_product;
@@ -51,6 +53,13 @@ const node/*: ReaderFragment*/ = {
       "kind": "ScalarField",
       "alias": null,
       "name": "id",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "availableItems",
       "args": null,
       "storageKey": null
     },
@@ -121,9 +130,14 @@ const node/*: ReaderFragment*/ = {
       "kind": "FragmentSpread",
       "name": "SameCategoryProductsList_product",
       "args": null
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "AddToCartButton_product",
+      "args": null
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'f280e6f585bac1f1b4454e53a8c362e2';
+(node/*: any*/).hash = 'b75e9621e01a90239385e947b9d06b56';
 module.exports = node;

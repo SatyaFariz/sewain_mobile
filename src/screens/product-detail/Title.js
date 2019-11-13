@@ -8,7 +8,7 @@ const Component = props => {
   return (
     <View style={s.container}>
       <Caption>{category.name}</Caption>
-      <Subheading>
+      <Subheading style={s.title}>
        {name}
       </Subheading>
       {availableItems < 1 &&
@@ -21,6 +21,10 @@ const Component = props => {
 const s = StyleSheet.create({
   container: {
     padding: 20
+  },
+
+  title: {
+    fontSize: 20
   },
   text: {
     fontSize: 13,
