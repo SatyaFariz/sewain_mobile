@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TouchableNativeFeedback, View, StyleSheet, ToastAndroid } from 'react-native'
+import { TouchableNativeFeedback, View, StyleSheet, ToastAndroid, Alert } from 'react-native'
 import { Subheading } from 'react-native-paper'
 import Logout from '../../../mutations/Logout'
 import useEnvironment from '../../../hooks/useEnvironment'
@@ -26,8 +26,28 @@ const Component = props => {
     }
   }
 
+  const confirmLogout = () => {
+    if(!loading) {
+      Alert.alert(
+        null,
+        'Anda yakin ingin keluar?',
+        [
+          {
+            text: 'Tidak',
+            onPress: () => {},
+            style: 'cancel',
+          },
+          {
+            text: 'Ya', onPress: logout
+          },
+        ],
+        { cancelable: false },
+      )
+    }
+  }
+
   return (
-    <TouchableNativeFeedback onPress={logout}>
+    <TouchableNativeFeedback onPress={confirmLogout}>
       <View style={s.container}>
         <Subheading style={s.text}>Log Out</Subheading>
       </View>
