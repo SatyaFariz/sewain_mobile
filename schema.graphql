@@ -1,5 +1,5 @@
 # source: http://www.sewain-dummy.com/graphql.php
-# timestamp: Thu Oct 31 2019 20:27:33 GMT+0700 (SE Asia Standard Time)
+# timestamp: Thu Nov 14 2019 01:15:43 GMT+0700 (SE Asia Standard Time)
 
 type ActionInfo {
   success: Boolean
@@ -13,6 +13,12 @@ input AddProductToCartInput {
   quantity: Int
   note: String
   deliveryAddress: String!
+}
+
+type AddProductToCartPayload {
+  actionInfo: ActionInfo
+  product: Product
+  cartItem: CartedProduct
 }
 
 type Admin {
@@ -167,7 +173,7 @@ type Mutation {
   getUnreadNotificationsCount: Viewer
   sendResetPasswordCode(email: Email!): ActionInfo
   resetPassword(email: Email!, code: String!, newPassword: String!): ActionInfo
-  addProductToCart(input: AddProductToCartInput!): ProductActionPayload
+  addProductToCart(input: AddProductToCartInput!): AddProductToCartPayload
   removeProductFromCart(cartedProductID: Int!): DeletePayload
   adminProductDisplayImageUpdate(productID: Int!): Product
   adminProductImageAdd(productID: Int!): Image
@@ -245,11 +251,6 @@ type Product {
   category: Category
   sameCategoryProducts: [Product]
   relatedProducts: [Product]
-}
-
-type ProductActionPayload {
-  actionInfo: ActionInfo
-  product: Product
 }
 
 """A connection to a list of items."""
