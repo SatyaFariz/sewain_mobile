@@ -22,7 +22,7 @@ const Component = props => {
       name,
       image: displayImage.secureUrl
     }
-    navigate('productDetail', { productID })
+    navigate('productDetail', params)
   }
 
   return (
