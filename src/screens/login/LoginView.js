@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ScrollView, StyleSheet, ToastAndroid } from 'react-native'
 import TextField from '../../common/TextField'
 import Validator from '../../utils/validator'
-import { Button } from 'react-native-paper'
+import Button from '../../common/Button'
 import Login from '../../mutations/Login'
 import useEnvironment from '../../hooks/useEnvironment'
 import useNavigator from '../../hooks/useNavigator'
@@ -105,8 +105,6 @@ const Component = props => {
 
       <Button
         style={s.button}
-        dark
-        mode="contained"
         onPress={toForgotPasswordScreen}
       >
         Lupa Password

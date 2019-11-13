@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import TextField from '../../common/TextField'
 import Validator from '../../utils/validator'
-import { Button } from 'react-native-paper'
+import Button from '../../common/Button'
 import { isEmail } from 'validator'
 
 const Component = props => {
@@ -44,9 +44,7 @@ const Component = props => {
       />
 
       <Button
-        style={[s.button, { marginTop: 20 }]}
-        dark
-        mode="contained"
+        style={s.button}
         onPress={sendCode}
       >
         Kirim Kode
@@ -63,7 +61,7 @@ const s = StyleSheet.create({
     paddingRight: 20
   },
   button: {
-    marginTop: 10,
+    marginTop: 20,
   }
 })
 

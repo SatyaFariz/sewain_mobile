@@ -6,13 +6,14 @@ import {
   ScrollView,
   ToastAndroid
 } from 'react-native'
-import { Title, Text, FAB, withTheme, TextInput, Button } from 'react-native-paper'
+import { Title, Text, FAB, withTheme, TextInput } from 'react-native-paper'
 import Dates from 'react-native-dates'
 import moment from 'moment'
 import AddToCart from '../../mutations/AddProductToCart'
 import withEnvironment from '../../hocs/withEnvironment'
 import withNavigator from '../../hocs/withNavigator'
 import Validator from '../../utils/validator'
+import Button from '../../common/Button'
 
 class Component extends React.Component {
   constructor(props) {
@@ -176,7 +177,6 @@ class Component extends React.Component {
             />
 
             <Button
-              mode="contained"
               style={s.button}
               onPress={this.addToCart}
             >

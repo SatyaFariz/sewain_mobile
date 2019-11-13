@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, StyleSheet, ToastAndroid } from 'react-native'
 import TextField from '../../common/TextField'
 import Validator from '../../utils/validator'
-import { Button } from 'react-native-paper'
+import Button from '../../common/Button'
 import useEnvironment from '../../hooks/useEnvironment'
 import useNavigator from '../../hooks/useNavigator'
 import ResetPassword from '../../mutations/ResetPassword'
@@ -132,9 +132,7 @@ const Component = props => {
       />
 
       <Button
-        style={[s.button, { marginTop: 20 }]}
-        dark
-        mode="contained"
+        style={{ marginTop: 20 }}
         onPress={changePassword}
       >
         Ubah Password
@@ -142,8 +140,6 @@ const Component = props => {
 
       <Button
         style={s.button}
-        dark
-        mode="contained"
         onPress={props.sendCode}
       >
         Kirim ulang kode

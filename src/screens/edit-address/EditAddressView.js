@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, StyleSheet, ToastAndroid } from 'react-native'
 import TextField from '../../common/TextField'
 import Validator from '../../utils/validator'
-import { Button } from 'react-native-paper'
+import Button from '../../common/Button'
 import useEnvironment from '../../hooks/useEnvironment'
 import useNavigator from '../../hooks/useNavigator'
 import AddressUpdate from '../../mutations/AddressUpdate'
@@ -52,12 +52,10 @@ const Component = props => {
       />
 
       <Button
-        style={[s.button, { marginTop: 20 }]}
-        dark
-        mode="contained"
+        style={s.button}
         onPress={save}
       >
-        Save
+        Simpan
       </Button>
     </View>
   )
@@ -71,7 +69,7 @@ const s = StyleSheet.create({
     paddingRight: 20
   },
   button: {
-    marginTop: 10,
+    marginTop: 20,
   }
 })
 

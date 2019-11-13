@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ScrollView, View, StyleSheet, ToastAndroid } from 'react-native'
 import TextField from '../../common/TextField'
 import Validator from '../../utils/validator'
-import { Button } from 'react-native-paper'
+import Button from '../../common/Button'
 import { isEmail } from 'validator'
 import useNavigator from '../../hooks/useNavigator'
 import useEnvironment from '../../hooks/useEnvironment'
@@ -196,8 +196,6 @@ const Component = props => {
 
         <Button
           style={s.button}
-          dark
-          mode="contained"
           onPress={register}
         >
           Daftar
@@ -215,7 +213,7 @@ const s = StyleSheet.create({
     paddingRight: 20
   },
   button: {
-    marginTop: 10,
+    marginTop: 20,
   }
 })
 

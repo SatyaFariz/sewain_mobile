@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Button } from 'react-native-paper'
+import Button from '../../../common/Button'
 import useNavigator from '../../../hooks/useNavigator'
 import NoContentView from '../../../common/NoContentView'
 
@@ -24,7 +24,7 @@ const Component = props => {
       <View>
         <Button
           style={s.button}
-          dark
+          mode="text"
           onPress={navigateToSignIn}
         >
           Masuk
@@ -32,8 +32,6 @@ const Component = props => {
 
         <Button
           style={s.button}
-          mode="contained"
-          dark
           onPress={navigateToSignUp}
         >
           Daftar
