@@ -4,7 +4,7 @@ import { Headline } from 'react-native-paper'
 import PromotionalProductItem from './PromotionalProductItem'
 import { graphql, createFragmentContainer } from 'react-relay'
 
-const itemContainerWidth = 240
+const itemContainerWidth = 190
 
 const Component = props => {
 

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FlatList, StyleSheet, View, TouchableNativeFeedback } from 'react-native'
+import { StyleSheet, View, TouchableNativeFeedback, Image } from 'react-native'
 import { Card, Title, Paragraph } from 'react-native-paper'
 import { graphql, createFragmentContainer } from 'react-relay'
 import truncate from 'ellipsize'
@@ -26,13 +26,18 @@ const Component = props => {
     navigate('productDetail', params)
   }
 
+  const nameTrimmed = name.trim()
+
   return (
     <View style={s.container}>
       <TouchableNativeFeedback onPress={toProductDetail}>
         <Card style={s.card}>
-          <Card.Cover source={{ uri: displayImage && displayImage.secureUrl }} />
+          <Image 
+            source={{ uri: displayImage && displayImage.secureUrl }} 
+            style={s.image}
+          />
           <View style={s.info}>
-            <Title style={s.title}>{truncate(name.trim(), 30)}</Title>
+            <Title style={s.title}>{nameTrimmed.length > 25 ? truncate(nameTrimmed, 25) : nameTrimmed}</Title>
             
             <Paragraph style={promotionalPriceText ? [s.text, s.redText] : s.text}>
               {rentalPricePerDayText}/hari
@@ -56,24 +61,29 @@ const s = StyleSheet.create({
     marginBottom: 2
   },
   card: {
-    flex: 1
+    flex: 1,
+    overflow: 'hidden'
   },
   title: {
-    fontSize: 15,
-    lineHeight: 15
+    fontSize: 13,
+    lineHeight: 13
   },
   info: {
     padding: 10
   },
   text: {
-    fontSize: 14,
-    lineHeight: 17
+    fontSize: 13,
+    lineHeight: 15
   },
   redText: {
     textDecorationLine: 'line-through',
     marginRight: 15,
     color: '#B00020',
     opacity: 0.6
+  },
+  image: {
+    width: '100%',
+    aspectRatio: 1
   }
 })
 

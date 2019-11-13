@@ -48,9 +48,9 @@ export default function createRelay() {
       }
     }
 
-  //  const url = 'https://sewain.iot.my.id/graphql.php'
+    const url = 'https://sewain.iot.my.id/graphql.php'
   //  const url = 'https://sewain-prod.herokuapp.com/graphql.php'
-    const url = 'http://192.168.1.116/graphql.php'
+  //  const url = 'http://192.168.1.116/graphql.php'
     return fetch(url, request).then(response => {
       return response.json()
     })
