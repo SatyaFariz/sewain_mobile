@@ -17,6 +17,12 @@ const Component = props => {
   const { navigate } = useNavigator()
 
   const toProductDetail = () => {
+    const params = {
+      productID,
+      name,
+      image: displayImage.secureUrl
+    }
+    
     navigate('productDetail', { productID })
   }
 
